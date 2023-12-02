@@ -1,5 +1,7 @@
 # https://updates.jenkins.io/download/plugins/
+authorize-project
 configuration-as-code
 job-dsl
 rebuild
 workflow-aggregator
+ws-cleanup

@@ -12,6 +12,6 @@ This year I've decided to try solve [Advent of Code](https://adventofcode.com/) 
     ```
 - Run
     ```shell
-    docker run -p 8081:8080 aoc-jenkins:latest
+    ./run.sh
     ```
 - Open [localhost:8081](http://localhost:8081/) and log in as user `aoc` with the password `aoc`
