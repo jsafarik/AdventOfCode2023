@@ -19,6 +19,7 @@ security:
       - "new java.util.LinkedHashMap"
       - "staticMethod java.lang.Character isDigit char"
       - "staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getAt char[] java.util.Collection"
+      - "staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods max java.util.Collection"
       - "staticMethod org.codehaus.groovy.transform.ImmutableASTTransformation checkPropNames java.lang.Object java.util.Map"
 
 jobs:
