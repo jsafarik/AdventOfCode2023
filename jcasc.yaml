@@ -1,0 +1,43 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin"
+  authorizationStrategy: "loggedInUsersCanDoAnything"
+  quietPeriod: 0
+  markupFormatter:
+    rawHtml:
+      disableSyntaxHighlighting: false
+
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false
+  queueItemAuthenticator:
+    authenticators:
+      - global:
+          strategy: "triggeringUsersAuthorizationStrategy"
+  scriptApproval:
+    approvedSignatures:
+      - "method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object"
+      - "new java.util.LinkedHashMap"
+      - "staticMethod java.lang.Character isDigit char"
+      - "staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getAt char[] java.util.Collection"
+      - "staticMethod org.codehaus.groovy.transform.ImmutableASTTransformation checkPropNames java.lang.Object java.util.Map"
+
+jobs:
+  - script: |
+      pipelineJob('seed-job') {
+        parameters {
+          stringParam('TARGET', "jobs/**/job.groovy", "Which JobDSL scripts should be processed")
+        }
+        definition {
+          cps {
+            script("""
+              node() {
+                cleanWs()
+                sh('cp -r /tmp/jobs jobs')
+                jobDsl(targets: params['TARGET'], sandbox: true)
+              }
+            """)
+            sandbox(true)
+          }
+        }
+      }
+      queue('seed-job')
