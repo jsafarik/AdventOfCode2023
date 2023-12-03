@@ -33,8 +33,8 @@ jobs:
             script("""
               node() {
                 cleanWs()
-                sh('cp -r /tmp/jobs jobs')
-                jobDsl(targets: params['TARGET'], sandbox: true)
+                sh('cp -r /tmp/jcasc/* .')
+                jobDsl(targets: params['TARGET'], sandbox: true, additionalClasspath: "src")
               }
             """)
             sandbox(true)
